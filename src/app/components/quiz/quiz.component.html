@@ -1,0 +1,21 @@
+<h1 class="mat-display-1">{{quiz.name}}</h1>
+<mat-stepper linear #stepper>
+    <mat-step *ngFor="let question of quiz.questions" [stepControl]="firstFormGroup">
+        <ng-template matStepLabel>Question</ng-template>
+        <label id="example-radio-group-label">{{question.text}}</label>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="demo-radio-group"
+            [(ngModel)]="selectedOption" id="question.id" name="question.id"
+            (ngModelChange)="SelectedOption(question,selectedOption)">
+            <mat-radio-button class="example-radio-button" *ngFor="let answer of question.answers" [value]="answer">
+                {{answer.text}}
+            </mat-radio-button>
+        </mat-radio-group>
+        <div *ngIf="selectedOption">Selected Option: {{selectedOption.text}}</div>
+        <div>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </div>
+    </mat-step>
+</mat-stepper>

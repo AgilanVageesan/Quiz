@@ -1,1 +1,52 @@
-<p>create-quiz works!</p>
+<div class="container-fluid" style="margin: 1%;">
+    <div class="form-row">
+        <mat-form-field style="width: 20rem;" class="example-form-field" appearance="fill">
+            <mat-label>Quiz Title</mat-label>
+            <input matInput type="text" style="font-size: 1rem;" [(ngModel)]="quizTitle">
+
+        </mat-form-field>
+
+        <!-- <h3>Quiz Name</h3>
+            <input name="quizTitle" [(ngModel)]="quizTitle" type="text" class="form-control" id="quizName"
+                placeholder="Tile of the quiz"> -->
+        <div class="form-group col-md-6">
+            <mat-form-field style="width: 30rem;" appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput [(ngModel)]="quizDescription" #message maxlength="256" placeholder="quiz description">
+                <mat-hint align="start"><strong>Few words about the quiz</strong> </mat-hint>
+                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+            </mat-form-field>
+            <!-- <h3>Description</h3>
+            <input name="quizDescription" [(ngModel)]="quizDescription" type="text" class="form-control"
+                id="Description" placeholder="Few words about the quiz"> -->
+        </div>
+    </div>
+    <!-- Questions -->
+
+    <button (click)="AddQuestion()" style="margin-top: 1%;margin-bottom: 1%;" mat-raised-button>Add Question</button>
+        <div id="questions">
+            <div *ngFor="let question of QuestionsList">
+                <div class="card bg-light mb-3" style="max-width: 50rem;">
+                    <div style="padding: 1%;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <h3>Question {{question.id}}</h3>
+                                <input name="question.id" [(ngModel)]="question.text" type="text" class="form-control"
+                                    id="question.id" placeholder="Question">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" (click)="AddAnswer(question)"
+                                    style="margin-top: 1%;margin-bottom: 1%;" mat-raised-button>Add
+                                    Answer</button>
+                                <div *ngFor="let answer of question.answers">
+                                    <input type="text" style="margin-top: 1%;margin-bottom: 1%;" class="form-control"
+                                        id="answer.id" [(ngModel)]="answer.text" placeholder="Answer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button (click)="CreateQuiz()" class="btn btn-primary">Create Quiz</button>
+    </div>
